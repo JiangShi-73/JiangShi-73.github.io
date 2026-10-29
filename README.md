@@ -1,7 +1,7 @@
 # jiangshi — 个人博客 / 作品集
 
 一个用 [Astro](https://astro.build) 搭的静态个人站：作品集 + 博客。
-深色、单强调色、极少的 JavaScript，构建产物是纯静态 HTML，可以扔到任何静态托管上。
+视觉走「工业科幻 HUD」路线——细线网格、瞄准环、等宽标注、单一信号黄；构建产物是纯静态 HTML，可以扔到任何静态托管上。
 
 ![首页](docs/preview-home.jpg)
 
@@ -135,7 +135,9 @@ GitHub Actions（[deploy.yml](.github/workflows/deploy.yml)）会自动构建并
 
 ## 设计说明
 
-- 深色单主题，一个强调色 + 两个渐变色相；颗粒质感用内联 SVG 噪声，无额外请求
-- 字阶 6 级、间距 4 的倍数、圆角两档——约束越少，改版越快
-- 动效统一：进入视口上移 22px、850ms、ease-out；`prefers-reduced-motion` 下全部关闭
-- JavaScript 只有一个 <script>：导航滚动状态、移动端菜单、IntersectionObserver 入场
+- **视觉语言**：近黑底 + 骨白字 + 唯一信号黄（`--signal`），所有分隔用 1px 细线，卡片/按钮全部直角
+- **字体**：Archivo Variable（用宽度轴撑到 118%，做大标题和数字）+ JetBrains Mono（标注、日期、编号），通过 npm 自托管，不请求外部 CDN
+- **结构**：每个区块以「细线 + 编号 + 英文标签」的标题行开场，编号由 CSS 计数器自动生成（`counter-increment: sec`），加区块不用手改
+- **装饰**：首页瞄准环是手写 SVG（刻度由脚本生成），90 秒转一圈；颗粒用内联噪声；顶部一条彩色光带
+- **动效**：入场位移 18px / 800ms / ease-out；`prefers-reduced-motion` 下全部关闭
+- **JavaScript** 只有一个 <script>：导航滚动状态、移动端菜单、IntersectionObserver 入场

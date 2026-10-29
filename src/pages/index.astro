@@ -7,72 +7,75 @@ import { projects } from '../data/projects';
 
 const featured = projects.filter((project) => project.featured).slice(0, 3);
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 4);
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const posts = allPosts.slice(0, 4);
 
 const formatDate = (date: Date) =>
   date
     .toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' })
     .replaceAll('/', '.');
 
-const statProjects = String(projects.length).padStart(2, '0');
-const statPosts = String(posts.length ? (await getCollection('blog')).filter((p) => !p.data.draft).length : 0).padStart(2, '0');
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <BaseLayout>
   <!-- 首屏 -->
   <section class="hero">
-    <div class="wrap">
-      <div class="hero__grid">
-        <div>
-          <p class="eyebrow reveal">{site.eyebrow}</p>
+    <div class="hero__reticle" aria-hidden="true">
+      <img src="/images/reticle.svg" alt="" width="800" height="800" fetchpriority="high" />
+    </div>
 
-          <h1 class="hero__title reveal" style="--d: 80ms">
-            <span>把想法，</span>
-            <span>做成<span class="grad">看得见</span></span>
-            <span>的东西。</span>
-          </h1>
+    <div class="wrap hero__inner">
+      <div class="hero__top">
+        <span>SITE 001 / PORTFOLIO — 2026</span>
+        <span class="hero__coords">30.2741° N / 120.1551° E · HANGZHOU</span>
+      </div>
 
-          <p class="hero__lede reveal" style="--d: 160ms">
-            我是 {site.author}，做界面、写代码，也记录一些关于设计与工程的思考。
-            这里放着做过的项目，和一些正在想的事。
-          </p>
+      <div class="hero__main">
+        <p class="eyebrow reveal">{site.eyebrow}</p>
 
-          <div class="hero__actions reveal" style="--d: 240ms">
-            <a class="btn btn--primary" href="/projects">
-              看看项目
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h13M13 6l6 6-6 6" />
-              </svg>
-            </a>
-            <a class="btn btn--ghost" href="/blog">读读文章</a>
-          </div>
+        <h1 class="hero__title reveal" style="--d: 80ms">
+          <span>把想法，</span>
+          <span>做成<span class="grad">看得见</span></span>
+          <span>的东西。</span>
+        </h1>
 
-          <div class="hero__stats reveal" style="--d: 320ms">
-            <div>
-              <div class="stat__num">{statProjects}</div>
-              <div class="stat__label">Projects</div>
-            </div>
-            <div>
-              <div class="stat__num">{statPosts}</div>
-              <div class="stat__label">Writing</div>
-            </div>
-            <div>
-              <div class="stat__num">06</div>
-              <div class="stat__label">Years</div>
-            </div>
-          </div>
-        </div>
+        <p class="hero__lede reveal" style="--d: 160ms">
+          我是 {site.author}，做界面、写代码，也记录一些关于设计与工程的思考。
+          这里放着做过的项目，和一些正在想的事。
+        </p>
 
-        <div class="hero__art reveal" style="--d: 200ms">
-          <img src="/images/hero-orb.svg" alt="" width="760" height="760" fetchpriority="high" />
+        <div class="hero__actions reveal" style="--d: 240ms">
+          <a class="btn btn--primary" href="/projects">
+            看看项目
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h13M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a class="btn btn--ghost" href="/blog">读读文章</a>
         </div>
       </div>
 
-      <div class="scroll-hint reveal" style="--d: 420ms">
-        <span></span>
-        Scroll
+      <div class="hero__stats reveal" style="--d: 320ms">
+        <div class="stat">
+          <div class="stat__num">{pad(projects.length)}</div>
+          <div class="stat__label">Projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">{pad(allPosts.length)}</div>
+          <div class="stat__label">Writing</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">{pad(6)}</div>
+          <div class="stat__label">Years</div>
+        </div>
+        <div class="scroll-hint" style="margin-left: auto">
+          <span></span>
+          Scroll
+        </div>
       </div>
     </div>
   </section>
@@ -87,9 +90,10 @@ const statPosts = String(posts.length ? (await getCollection('blog')).filter((p)
   <!-- 一句话 -->
   <section class="section--tight">
     <div class="wrap">
-      <blockquote class="statement reveal">
+      <p class="mono reveal" style="margin-bottom: 1rem">// STATEMENT</p>
+      <blockquote class="statement reveal" style="margin-left: 0; margin-right: 0">
         好的界面不解释自己，它只是刚好
-        <span class="grad">顺手</span>。
+        <span>顺手</span>。
       </blockquote>
     </div>
   </section>
@@ -104,14 +108,14 @@ const statPosts = String(posts.length ? (await getCollection('blog')).filter((p)
         </div>
         <a class="section-head__link" href="/projects">
           全部项目
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M7 17L17 7M9 7h8v8" />
           </svg>
         </a>
       </div>
 
       <div class="projects-grid">
-        {featured.map((project, index) => <ProjectCard project={project} delay={index * 90} />)}
+        {featured.map((project, index) => <ProjectCard project={project} index={index} delay={index * 90} />)}
       </div>
     </div>
   </section>
@@ -126,7 +130,7 @@ const statPosts = String(posts.length ? (await getCollection('blog')).filter((p)
         </div>
         <a class="section-head__link" href="/blog">
           全部文章
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h13M13 6l6 6-6 6" />
           </svg>
         </a>

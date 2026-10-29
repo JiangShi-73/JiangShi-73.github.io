@@ -5,9 +5,10 @@ interface Props {
   project: Project;
   wide?: boolean;
   delay?: number;
+  index?: number;
 }
 
-const { project, wide = false, delay = 0 } = Astro.props;
+const { project, wide = false, delay = 0, index } = Astro.props;
 ---
 
 <a
@@ -24,6 +25,7 @@ const { project, wide = false, delay = 0 } = Astro.props;
       loading="lazy"
       decoding="async"
     />
+    {index !== undefined && <span class="card-index">{String(index + 1).padStart(2, '0')}</span>}
   </div>
 
   <div class="project-card__body">
@@ -41,7 +43,7 @@ const { project, wide = false, delay = 0 } = Astro.props;
         {project.stack.slice(0, 3).map((tech) => <span class="tag">{tech}</span>)}
       </div>
       <span class="arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M7 17L17 7M9 7h8v8" />
         </svg>
       </span>

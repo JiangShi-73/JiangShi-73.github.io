@@ -20,7 +20,7 @@ import { projects } from '../../data/projects';
       <div class="projects-grid projects-grid--two">
         {
           projects.map((project, index) => (
-            <ProjectCard project={project} wide={index === 0} delay={index * 70} />
+            <ProjectCard project={project} wide={index === 0} delay={index * 70} index={index} />
           ))
         }
       </div>

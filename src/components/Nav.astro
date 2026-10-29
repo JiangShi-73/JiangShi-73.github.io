@@ -6,32 +6,25 @@ const isActive = (href: string) => (href === '/' ? current === '/' : current.sta
 ---
 
 <header class="nav">
-  <div class="nav__inner wrap">
+  <div class="nav__inner">
     <a class="brand" href="/" aria-label={`${site.name} 首页`}>
-      <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-          <path d="M12 2.5v19M3.4 7.25l17.2 9.5M20.6 7.25L3.4 16.75" />
-        </svg>
-      </span>
-      <span>{site.name}</span>
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">{site.name}</span>
+      <span class="brand__sub" aria-hidden="true">/ portfolio</span>
     </a>
 
     <nav class="nav__links" aria-label="主导航">
       {
-        site.nav.map((item) => (
+        site.nav.map((item, i) => (
           <a class="nav__link" href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            <span class="idx">{String(i + 1).padStart(2, '0')}</span>
             {item.label}
           </a>
         ))
       }
     </nav>
 
-    <a class="nav__cta" href={`mailto:${site.email}`}>
-      聊聊
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M5 12h13M13 6l6 6-6 6" />
-      </svg>
-    </a>
+    <span class="nav__meta" aria-hidden="true">SYSTEM / 2026</span>
 
     <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="打开菜单">
       <span></span>
@@ -41,13 +34,17 @@ const isActive = (href: string) => (href === '/' ? current === '/' : current.sta
   <div class="nav__drawer" id="nav-drawer" data-open="false">
     <nav aria-label="移动端导航">
       {
-        site.nav.map((item) => (
+        site.nav.map((item, i) => (
           <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            <span class="mono">0{i + 1}</span>
             {item.label}
           </a>
         ))
       }
-      <a href={`mailto:${site.email}`}>联系我</a>
+      <a href={`mailto:${site.email}`}>
+        <span class="mono">05</span>
+        联系
+      </a>
     </nav>
   </div>
 </header>
