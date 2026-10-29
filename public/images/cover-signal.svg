@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" fill="none">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#080f16"/>
+      <stop offset="100%" stop-color="#05080c"/>
+    </linearGradient>
+    <linearGradient id="sig" gradientUnits="userSpaceOnUse" x1="100" y1="0" x2="1100" y2="0">
+      <stop offset="0%" stop-color="#7fd3ff" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#7fd3ff"/>
+      <stop offset="100%" stop-color="#c3ecff" stop-opacity="0.4"/>
+    </linearGradient>
+    <radialGradient id="sg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7fd3ff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#7fd3ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="sb" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="55"/></filter>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#bg6)"/>
+  <circle cx="600" cy="450" r="360" fill="url(#sg)" filter="url(#sb)"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.06">
+    <path d="M100 450h1000"/>
+    <path d="M100 300h1000M100 600h1000" stroke-dasharray="3 9"/>
+  </g>
+
+  <g stroke="url(#sig)" stroke-width="3" stroke-linecap="round">
+    <path d="M140 450h34"/>
+    <path d="M196 450v-22M196 450v22"/>
+    <path d="M236 450v-46M236 450v46"/>
+    <path d="M276 450v-14"/>
+    <path d="M316 450v-84M316 450v84"/>
+    <path d="M356 450v-34M356 450v34"/>
+    <path d="M396 450v-140M396 450v140"/>
+    <path d="M436 450v-58M436 450v58"/>
+    <path d="M476 450v-96M476 450v96"/>
+    <path d="M516 450v-26M516 450v26"/>
+    <path d="M556 450v-176M556 450v176"/>
+    <path d="M596 450v-64M596 450v64"/>
+    <path d="M636 450v-118M636 450v118"/>
+    <path d="M676 450v-40M676 450v40"/>
+    <path d="M716 450v-150M716 450v150"/>
+    <path d="M756 450v-72M756 450v72"/>
+    <path d="M796 450v-30M796 450v30"/>
+    <path d="M836 450v-104M836 450v104"/>
+    <path d="M876 450v-20M876 450v20"/>
+    <path d="M916 450v-64M916 450v64"/>
+    <path d="M956 450v-12M956 450v12"/>
+    <path d="M996 450v-40M996 450v40"/>
+    <path d="M1046 450h-14"/>
+  </g>
+
+  <g fill="#7fd3ff">
+    <circle cx="556" cy="274" r="5"/>
+    <circle cx="716" cy="300" r="4"/>
+  </g>
+  <g font-family="ui-monospace, monospace" font-size="14" fill="#c3ecff" fill-opacity="0.4">
+    <text x="100" y="690">00:00</text>
+    <text x="1040" y="690">23:59</text>
+  </g>
+
+  <text x="96" y="150" fill="#d8f2ff" fill-opacity="0.5" font-family="ui-monospace, monospace" font-size="17" letter-spacing="7">SIGNAL / LIVE MONITOR</text>
+</svg>

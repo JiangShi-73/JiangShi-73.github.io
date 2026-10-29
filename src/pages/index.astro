@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../config';
+import { projects } from '../data/projects';
+
+const featured = projects.filter((project) => project.featured).slice(0, 3);
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+
+const formatDate = (date: Date) =>
+  date
+    .toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' })
+    .replaceAll('/', '.');
+
+const statProjects = String(projects.length).padStart(2, '0');
+const statPosts = String(posts.length ? (await getCollection('blog')).filter((p) => !p.data.draft).length : 0).padStart(2, '0');
+---
+
+<BaseLayout>
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__grid">
+        <div>
+          <p class="eyebrow reveal">{site.eyebrow}</p>
+
+          <h1 class="hero__title reveal" style="--d: 80ms">
+            <span>把想法，</span>
+            <span>做成<span class="grad">看得见</span></span>
+            <span>的东西。</span>
+          </h1>
+
+          <p class="hero__lede reveal" style="--d: 160ms">
+            我是 {site.author}，做界面、写代码，也记录一些关于设计与工程的思考。
+            这里放着做过的项目，和一些正在想的事。
+          </p>
+
+          <div class="hero__actions reveal" style="--d: 240ms">
+            <a class="btn btn--primary" href="/projects">
+              看看项目
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h13M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a class="btn btn--ghost" href="/blog">读读文章</a>
+          </div>
+
+          <div class="hero__stats reveal" style="--d: 320ms">
+            <div>
+              <div class="stat__num">{statProjects}</div>
+              <div class="stat__label">Projects</div>
+            </div>
+            <div>
+              <div class="stat__num">{statPosts}</div>
+              <div class="stat__label">Writing</div>
+            </div>
+            <div>
+              <div class="stat__num">06</div>
+              <div class="stat__label">Years</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__art reveal" style="--d: 200ms">
+          <img src="/images/hero-orb.svg" alt="" width="760" height="760" fetchpriority="high" />
+        </div>
+      </div>
+
+      <div class="scroll-hint reveal" style="--d: 420ms">
+        <span></span>
+        Scroll
+      </div>
+    </div>
+  </section>
+
+  <!-- 跑马灯 -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      {[...site.marquee, ...site.marquee].map((word) => <span class="marquee__item">{word}</span>)}
+    </div>
+  </div>
+
+  <!-- 一句话 -->
+  <section class="section--tight">
+    <div class="wrap">
+      <blockquote class="statement reveal">
+        好的界面不解释自己，它只是刚好
+        <span class="grad">顺手</span>。
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 精选项目 -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Selected Work</p>
+          <h2>最近做的一些事</h2>
+        </div>
+        <a class="section-head__link" href="/projects">
+          全部项目
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17L17 7M9 7h8v8" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="projects-grid">
+        {featured.map((project, index) => <ProjectCard project={project} delay={index * 90} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 最新文章 -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Writing</p>
+          <h2>最近写下的</h2>
+        </div>
+        <a class="section-head__link" href="/blog">
+          全部文章
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h13M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="posts">
+        {
+          posts.map((post, index) => (
+            <a class="post-row reveal" href={`/blog/${post.id}`} style={`--d: ${index * 60}ms`}>
+              <time class="post-row__date" datetime={post.data.date.toISOString()}>
+                {formatDate(post.data.date)}
+              </time>
+              <div>
+                <h3 class="post-row__title">{post.data.title}</h3>
+                <p class="post-row__desc">{post.data.description}</p>
+              </div>
+              <div class="post-row__tags">
+                {post.data.tags.slice(0, 2).map((tag) => <span class="tag">{tag}</span>)}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

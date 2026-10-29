@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config';
+
+const timeline = [
+  { year: '2026', title: '独立设计与开发', desc: '把时间的一半交给自己的产品，另一半交给界面与系统。' },
+  { year: '2024', title: '设计系统负责人', desc: '搭建 Atlas / Forma 两套内部系统，服务 40 人产品团队。' },
+  { year: '2022', title: '高级前端工程师', desc: '负责数据产品可视化，从图表到实时看板。' },
+  { year: '2020', title: '开始写博客', desc: '第一篇是给自己看的笔记，后来变成了习惯。' },
+];
+
+const skills = ['界面设计', '设计系统', 'TypeScript', 'React', 'Astro', '数据可视化', '动效', '无障碍', '写作'];
+---
+
+<BaseLayout title="关于" description="关于我：做界面、写代码、偶尔写字。">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">About</p>
+      <h1 class="reveal" style="--d: 60ms">你好，我是 <span class="grad">{site.author}</span>。</h1>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-portrait reveal">
+          <img src="/images/portrait.svg" alt={`${site.author} 的标志插画`} width="800" height="1000" />
+        </div>
+
+        <div class="about-body reveal" style="--d: 120ms">
+          <p>
+            我做界面，也写实现它的代码。过去六年，我在产品团队里做设计系统、数据可视化和前端架构，
+            现在更多时间花在自己的项目上。
+          </p>
+          <p>
+            我相信界面应该在不需要解释的情况下就顺手——这意味着大量看起来「没什么设计」的决定：
+            对齐、留白、层次、动效的分寸。这些细节加起来，才是用户感受到的那一点点顺滑。
+          </p>
+          <p>
+            这个博客是我整理思路的地方。写下来，是为了把模糊的直觉变成能检查的判断；
+            如果恰好对你有用，那就更好了。
+          </p>
+
+          <div class="skill-list">
+            {skills.map((skill) => <span class="tag">{skill}</span>)}
+          </div>
+        </div>
+      </div>
+
+      <div class="about-timeline">
+        <p class="eyebrow">Timeline</p>
+        <div class="timeline">
+          {
+            timeline.map((item) => (
+              <div class="timeline__item reveal">
+                <div class="timeline__year">{item.year}</div>
+                <div>
+                  <div class="timeline__title">{item.title}</div>
+                  <div class="timeline__desc">{item.desc}</div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="section-head reveal" style="margin-top: clamp(3rem, 7vw, 6rem); margin-bottom: 0">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>想聊聊？</h2>
+        </div>
+        <a class="btn btn--primary" href={`mailto:${site.email}`}>
+          {site.email}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h13M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

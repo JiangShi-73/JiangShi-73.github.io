@@ -1,0 +1,46 @@
+---
+import { site } from '../config';
+
+interface Props {
+  noCta?: boolean;
+}
+
+const { noCta = false } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap">
+    {
+      !noCta && (
+        <div class="footer__cta reveal">
+          <h2>
+            有想法？<br />
+            一起把它<span class="grad nowrap">做出来</span>。
+          </h2>
+          <a class="footer__mail" href={`mailto:${site.email}`}>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2.5" />
+              <path d="M4 7l8 6 8-6" />
+            </svg>
+            {site.email}
+          </a>
+        </div>
+      )
+    }
+
+    <div class="footer__bottom">
+      <p>© {year} {site.name} · 用 Astro 构建</p>
+      <div class="footer__socials">
+        {
+          site.socials.map((item) => (
+            <a href={item.href} target="_blank" rel="noreferrer noopener">
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+      <a href="#main" class="footer__top">回到顶部 ↑</a>
+    </div>
+  </div>
+</footer>

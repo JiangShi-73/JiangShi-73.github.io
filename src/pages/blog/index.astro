@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const byYear = new Map<string, typeof posts>();
+for (const post of posts) {
+  const year = String(post.data.date.getFullYear());
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+
+const formatDate = (date: Date) =>
+  date
+    .toLocaleDateString('zh-CN', { month: '2-digit', day: '2-digit' })
+    .replaceAll('/', '.');
+---
+
+<BaseLayout title="文章" description="关于设计、前端与独立开发的笔记。">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Writing</p>
+      <h1 class="reveal" style="--d: 60ms">想清楚，<span class="grad">再写下来</span>。</h1>
+      <p class="reveal" style="--d: 120ms">
+        共 {posts.length} 篇。多数是写给自己的：把踩过的坑、想明白的事，留成能回看的文字。
+      </p>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      {
+        [...byYear.entries()].map(([year, yearPosts]) => (
+          <div style="margin-bottom: 3.5rem">
+            <p class="eyebrow" style="margin-bottom: 1rem">{year}</p>
+            <div class="posts">
+              {yearPosts.map((post, index) => (
+                <a class="post-row reveal" href={`/blog/${post.id}`} style={`--d: ${index * 50}ms`}>
+                  <time class="post-row__date" datetime={post.data.date.toISOString()}>
+                    {formatDate(post.data.date)}
+                  </time>
+                  <div>
+                    <h3 class="post-row__title">{post.data.title}</h3>
+                    <p class="post-row__desc">{post.data.description}</p>
+                  </div>
+                  <div class="post-row__tags">
+                    {post.data.tags.slice(0, 2).map((tag) => <span class="tag">{tag}</span>)}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1416"/>
+      <stop offset="100%" stop-color="#060a0c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7cf0c8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#7cf0c8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#7cf0c8" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#b9ffe6"/>
+    </linearGradient>
+    <filter id="b6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="640" cy="420" r="360" fill="url(#glow)" opacity="0.5" filter="url(#b6)"/>
+
+  <g stroke="#7cf0c8" stroke-opacity="0.22" fill="none">
+    <circle cx="640" cy="420" r="180"/>
+    <circle cx="640" cy="420" r="250" stroke-opacity="0.13"/>
+    <circle cx="640" cy="420" r="320" stroke-opacity="0.08"/>
+  </g>
+  <circle cx="640" cy="420" r="104" fill="#0d1a1a" stroke="#7cf0c8" stroke-opacity="0.5"/>
+  <path d="M614 392l38 28-38 28z" fill="#b9ffe6"/>
+
+  <g fill="url(#bar)">
+    <rect x="120" y="700" width="14" height="60" rx="7" opacity="0.45"/>
+    <rect x="152" y="668" width="14" height="92" rx="7" opacity="0.55"/>
+    <rect x="184" y="636" width="14" height="124" rx="7" opacity="0.7"/>
+    <rect x="216" y="690" width="14" height="70" rx="7" opacity="0.4"/>
+    <rect x="248" y="612" width="14" height="148" rx="7" opacity="0.8"/>
+    <rect x="280" y="658" width="14" height="102" rx="7" opacity="0.55"/>
+    <rect x="312" y="700" width="14" height="60" rx="7" opacity="0.35"/>
+    <rect x="344" y="646" width="14" height="114" rx="7" opacity="0.6"/>
+  </g>
+  <g fill="url(#bar)" transform="translate(760 0)">
+    <rect x="120" y="690" width="14" height="70" rx="7" opacity="0.4"/>
+    <rect x="152" y="646" width="14" height="114" rx="7" opacity="0.6"/>
+    <rect x="184" y="600" width="14" height="160" rx="7" opacity="0.85"/>
+    <rect x="216" y="668" width="14" height="92" rx="7" opacity="0.5"/>
+    <rect x="248" y="712" width="14" height="48" rx="7" opacity="0.3"/>
+  </g>
+  <text x="96" y="150" fill="#eafff8" fill-opacity="0.5" font-family="ui-monospace, monospace" font-size="17" letter-spacing="7">LUMEN / LOCAL MUSIC</text>
+</svg>

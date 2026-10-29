@@ -1,0 +1,13 @@
+# build output
+dist/
+dist.zip
+.astro/
+
+# deps
+node_modules/
+
+# misc
+.DS_Store
+Thumbs.db
+.vercel
+.netlify

@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project, index) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      prev: projects[index - 1] ?? null,
+      next: projects[index + 1] ?? null,
+    },
+  }));
+}
+
+const { project, prev, next } = Astro.props;
+---
+
+<BaseLayout title={project.title} description={project.summary} noFooterCta>
+  <article class="article">
+    <div class="wrap">
+      <a class="back-link" href="/projects">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H6M11 6l-6 6 6 6" />
+        </svg>
+        所有项目
+      </a>
+
+      <header class="article__head">
+        <p class="eyebrow" style="margin-top: 2rem">{project.year} · {project.role}</p>
+        <h1 class="article__title">{project.title}</h1>
+        <p class="article__lede">{project.tagline}</p>
+      </header>
+
+      <figure class="project-hero">
+        <img src={project.cover} alt={`${project.title} 预览`} width="1200" height="900" />
+      </figure>
+
+      <div class="entry">
+        <aside class="entry__aside">
+          <div>
+            <span class="entry__label">年份</span>
+            <span class="entry__value">{project.year}</span>
+          </div>
+          <div>
+            <span class="entry__label">角色</span>
+            <span class="entry__value">{project.role}</span>
+          </div>
+          <div>
+            <span class="entry__label">技术</span>
+            <span class="entry__value">{project.stack.join(' / ')}</span>
+          </div>
+          {
+            project.links && project.links.length > 0 && (
+              <div class="entry__links">
+                {project.links.map((link) => (
+                  <a href={link.href}>
+                    {link.label}
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M7 17L17 7M9 7h8v8" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            )
+          }
+        </aside>
+
+        <div class="entry__main">
+          <p class="entry__summary">{project.summary}</p>
+
+          <div class="prose">
+            {
+              project.sections.map((section) => (
+                <section>
+                  <h2>{section.title}</h2>
+                  {section.text.split('\n\n').map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
+                </section>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <nav class="article__foot" aria-label="项目翻页">
+        {
+          prev ? (
+            <a class="back-link" href={`/projects/${prev.slug}`}>
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 12H6M11 6l-6 6 6 6" />
+              </svg>
+              上一个：{prev.title}
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          next && (
+            <a class="back-link" href={`/projects/${next.slug}`}>
+              下一个：{next.title}
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h13M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          )
+        }
+      </nav>
+    </div>
+  </article>
+</BaseLayout>

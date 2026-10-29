@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+---
+
+<BaseLayout title="项目" description="做过的项目：产品、设计系统、数据可视化与独立开发。">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Projects</p>
+      <h1 class="reveal" style="--d: 60ms">做过的，<span class="grad">和做着的</span>。</h1>
+      <p class="reveal" style="--d: 120ms">
+        从独立小工具到团队级设计系统。每个项目都尽量写清楚：为什么做、怎么做的、最后怎么样。
+      </p>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="projects-grid projects-grid--two">
+        {
+          projects.map((project, index) => (
+            <ProjectCard project={project} wide={index === 0} delay={index * 70} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

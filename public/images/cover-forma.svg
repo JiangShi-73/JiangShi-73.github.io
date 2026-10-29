@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" fill="none">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1108"/>
+      <stop offset="100%" stop-color="#070805"/>
+    </linearGradient>
+    <radialGradient id="fg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d9f57c" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#d9f57c" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fb" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="55"/></filter>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#bg5)"/>
+  <circle cx="620" cy="440" r="340" fill="url(#fg)" filter="url(#fb)"/>
+
+  <g stroke="#d9f57c" stroke-opacity="0.10">
+    <path d="M300 180h700M300 340h700M300 500h700M300 660h700"/>
+    <path d="M300 180v480M440 180v480M580 180v480M720 180v480M860 180v480"/>
+  </g>
+
+  <g>
+    <rect x="330" y="210" width="96" height="96" rx="16" fill="none" stroke="#d9f57c" stroke-opacity="0.7" stroke-width="2"/>
+    <circle cx="506" cy="258" r="48" fill="#d9f57c" fill-opacity="0.85"/>
+    <path d="M612 306l52-96 52 96z" fill="none" stroke="#d9f57c" stroke-opacity="0.7" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="760" y="210" width="96" height="96" rx="48" fill="none" stroke="#d9f57c" stroke-opacity="0.45" stroke-width="2"/>
+
+    <path d="M330 370h96a48 48 0 0 1 0 96h-96z" fill="#d9f57c" fill-opacity="0.14" stroke="#d9f57c" stroke-opacity="0.5" stroke-width="2"/>
+    <rect x="458" y="370" width="96" height="96" rx="16" fill="#d9f57c" fill-opacity="0.14"/>
+    <path d="M612 418a52 52 0 1 1 104 0 52 52 0 1 1-104 0" fill="none" stroke="#d9f57c" stroke-opacity="0.6" stroke-width="2" stroke-dasharray="6 8"/>
+    <rect x="760" y="370" width="96" height="96" rx="16" fill="none" stroke="#d9f57c" stroke-opacity="0.25" stroke-width="2"/>
+    <path d="M784 442l24-48 24 48" fill="none" stroke="#d9f57c" stroke-opacity="0.25" stroke-width="2"/>
+
+    <circle cx="378" cy="578" r="48" fill="none" stroke="#d9f57c" stroke-opacity="0.25" stroke-width="2"/>
+    <rect x="458" y="530" width="96" height="96" rx="16" fill="none" stroke="#d9f57c" stroke-opacity="0.2" stroke-width="2"/>
+    <path d="M612 530h96v96h-96z" fill="none" stroke="#d9f57c" stroke-opacity="0.2" stroke-width="2" transform="rotate(12 660 578)"/>
+    <rect x="760" y="530" width="96" height="96" rx="16" fill="#d9f57c" fill-opacity="0.32"/>
+  </g>
+
+  <g fill="#d9f57c">
+    <circle cx="1010" cy="250" r="4"/>
+    <circle cx="972" cy="640" r="3"/>
+  </g>
+
+  <text x="96" y="150" fill="#f2ffd0" fill-opacity="0.5" font-family="ui-monospace, monospace" font-size="17" letter-spacing="7">FORMA / DESIGN SYSTEM</text>
+</svg>

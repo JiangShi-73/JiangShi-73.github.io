@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="页面走丢了" noFooterCta>
+  <section class="hero" style="min-height: 70vh; display: grid; place-items: center; text-align: center">
+    <div class="wrap">
+      <p class="eyebrow" style="justify-content: center">404</p>
+      <h1 style="margin-top: 1.2rem">这一页<span class="grad">不存在</span>。</h1>
+      <p class="hero__lede" style="margin-inline: auto">
+        链接可能改过，或者只是敲错了一个字符。
+      </p>
+      <div class="hero__actions" style="justify-content: center">
+        <a class="btn btn--primary" href="/">回到首页</a>
+        <a class="btn btn--ghost" href="/blog">看看文章</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
