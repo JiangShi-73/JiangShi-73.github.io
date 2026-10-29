@@ -107,20 +107,31 @@ draft: false
 
 ## 发布
 
-构建产物是纯静态文件，任选一个：
+**线上地址：<https://jiangshi-73.github.io/>**
+仓库：[JiangShi-73/JiangShi-73.github.io](https://github.com/JiangShi-73/JiangShi-73.github.io)（这是 GitHub 的"用户主页仓库"，所以站点在根路径下，不需要 `base`）
 
-- **Vercel / Netlify**：导入仓库，框架自动识别为 Astro，直接部署
-- **Cloudflare Pages**：构建命令 `npm run build`，输出目录 `dist`
-- **GitHub Pages**：需要改 `astro.config.mjs`
+改完内容推上去就自动发布：
 
-```js
-export default defineConfig({
-  site: 'https://你的域名',
-  base: '/仓库名',   // 仅当站点在 xxx.github.io/仓库名 下时才需要
-});
+```bash
+git add -A
+git commit -m "写了点什么"
+git push
 ```
 
-同时记得把 `site` 换成真实域名，canonical / OG 标签会用到它。
+GitHub Actions（[deploy.yml](.github/workflows/deploy.yml)）会自动构建并发布，大约 1 分钟生效。
+
+### 以后想接自己的域名（jiangshi.com）
+
+代码这边已经准备好，到时候只需要四步：
+
+1. 在**域名所在的那个阿里云账号**里改解析：
+   - `@`  A 记录 → `185.199.108.153` / `185.199.109.153` / `185.199.110.153` / `185.199.111.153`
+   - `www` CNAME → `jiangshi-73.github.io`
+2. 把 `astro.config.mjs` 的 `site` 改成 `'https://jiangshi.com'`
+3. 新建 `public/CNAME`，内容就一行：`jiangshi.com`
+4. 仓库 Settings → Pages → Custom domain 填 `jiangshi.com`，勾上 Enforce HTTPS
+
+推送后等 DNS 生效即可。
 
 ## 设计说明
 
