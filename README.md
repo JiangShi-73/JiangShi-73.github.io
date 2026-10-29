@@ -1,4 +1,4 @@
-# Aster — 个人博客 / 作品集
+# jiangshi — 个人博客 / 作品集
 
 一个用 [Astro](https://astro.build) 搭的静态个人站：作品集 + 博客。
 深色、单强调色、极少的 JavaScript，构建产物是纯静态 HTML，可以扔到任何静态托管上。

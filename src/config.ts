@@ -3,13 +3,13 @@
  */
 export const site = {
   // 品牌名（会出现在导航、页脚、浏览器标题里）
-  name: 'Aster',
+  name: 'jiangshi',
   // 首页大标题上方的眉标
   eyebrow: '独立设计 & 前端 · 2026',
   // 一句话介绍（SEO 描述也用它）
   description: '一个把想法做成界面的地方：项目、笔记，以及关于设计与代码的一些思考。',
-  author: 'Aster',
-  email: 'hello@example.com',
+  author: 'jiangshi',
+  email: '2107210738@qq.com',
   location: '中国 · 杭州',
   // 页脚与关于页的社交链接
   socials: [
