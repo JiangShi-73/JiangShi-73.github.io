@@ -10,9 +10,11 @@ interface Props {
   title?: string;
   description?: string;
   noFooterCta?: boolean;
+  /** 'paper' 让整页底色变成米白（关于页用） */
+  theme?: 'dark' | 'paper';
 }
 
-const { title, description = site.description, noFooterCta = false } = Astro.props;
+const { title, description = site.description, noFooterCta = false, theme = 'dark' } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} · ${site.eyebrow}`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com');
 ---
@@ -25,7 +27,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
-    <meta name="theme-color" content="#07080b" />
+    <meta name="theme-color" content={theme === 'paper' ? '#e7e5df' : '#0a0b0c'} />
     <meta name="color-scheme" content="dark" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -45,7 +47,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com
       }, 2500);
     </script>
   </head>
-  <body>
+  <body data-theme={theme}>
     <a class="skip-link" href="#main">跳到主要内容</a>
     <div class="ambient" aria-hidden="true"></div>
     <Nav />
