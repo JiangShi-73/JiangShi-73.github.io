@@ -1,54 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" fill="none">
   <defs>
-    <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#161d29"/>
-      <stop offset="55%" stop-color="#0c1017"/>
-      <stop offset="100%" stop-color="#07080b"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f1e6"/>
+      <stop offset="100%" stop-color="#e6dfd0"/>
     </linearGradient>
-    <radialGradient id="pglow" cx="50%" cy="45%" r="50%">
-      <stop offset="0%" stop-color="#7cf0c8" stop-opacity="0.26"/>
-      <stop offset="100%" stop-color="#7cf0c8" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="pviolet" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#93a7ff" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#93a7ff" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="pblur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="50"/></filter>
-    <linearGradient id="pmark" gradientUnits="userSpaceOnUse" x1="300" y1="320" x2="500" y2="560">
-      <stop offset="0%" stop-color="#d8fff3"/>
-      <stop offset="60%" stop-color="#7cf0c8"/>
-      <stop offset="100%" stop-color="#93a7ff"/>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22314a"/>
+      <stop offset="100%" stop-color="#cf4520"/>
     </linearGradient>
   </defs>
-
-  <rect width="800" height="1000" fill="url(#pbg)"/>
-
-  <g stroke="#ffffff" stroke-opacity="0.045">
-    <path d="M0 250h800M0 500h800M0 750h800"/>
-    <path d="M200 0v1000M400 0v1000M600 0v1000"/>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <g stroke="#191b1f" stroke-opacity="0.07">
+    <path d="M0 250h800M0 500h800M0 750h800M200 0v1000M400 0v1000M600 0v1000"/>
   </g>
-
-  <circle cx="400" cy="452" r="330" fill="url(#pviolet)" filter="url(#pblur)"/>
-  <circle cx="400" cy="440" r="250" fill="url(#pglow)" filter="url(#pblur)"/>
-
-  <g stroke="#7cf0c8" fill="none">
-    <circle cx="400" cy="440" r="196" stroke-opacity="0.28"/>
-    <circle cx="400" cy="440" r="238" stroke-opacity="0.12" stroke-dasharray="2 9"/>
-  </g>
-
-  <g stroke="url(#pmark)" stroke-width="13" stroke-linecap="round">
+  <circle cx="400" cy="440" r="236" fill="none" stroke="#191b1f" stroke-opacity="0.22"/>
+  <circle cx="400" cy="440" r="196" fill="none" stroke="#191b1f" stroke-opacity="0.1" stroke-dasharray="2 9"/>
+  <rect x="120" y="120" width="110" height="110" fill="#22314a" fill-opacity="0.92"/>
+  <g stroke="url(#mark)" stroke-width="13" stroke-linecap="round">
     <path d="M400 328v224"/>
     <path d="M303 384l194 112"/>
     <path d="M497 384L303 496"/>
   </g>
-
-  <g fill="#7cf0c8">
-    <circle cx="400" cy="186" r="4"/>
-    <circle cx="640" cy="440" r="3"/>
-    <circle cx="166" cy="596" r="2.6"/>
-  </g>
-  <path d="M400 186v-44" stroke="#7cf0c8" stroke-opacity="0.35"/>
-
-  <text x="56" y="900" fill="#e8fff8" fill-opacity="0.75" font-family="ui-monospace, monospace" font-size="26" letter-spacing="7">JIANGSHI</text>
-  <text x="56" y="940" fill="#e8fff8" fill-opacity="0.3" font-family="ui-monospace, monospace" font-size="14" letter-spacing="6">PORTFOLIO / 2026</text>
+  <rect x="60" y="876" width="46" height="14" fill="#cf4520"/>
+  <text x="120" y="890" fill="#191b1f" fill-opacity="0.8" font-family="ui-monospace, monospace" font-size="24" letter-spacing="8">JIANGSHI</text>
+  <text x="60" y="936" fill="#191b1f" fill-opacity="0.45" font-family="ui-monospace, monospace" font-size="13" letter-spacing="5">PORTFOLIO / 2026</text>
 </svg>
