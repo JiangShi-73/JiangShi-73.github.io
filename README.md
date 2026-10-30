@@ -133,6 +133,18 @@ GitHub Actions（[deploy.yml](.github/workflows/deploy.yml)）会自动构建并
 
 推送后等 DNS 生效即可。
 
+## 二维码
+
+指向站点首页的二维码，扫一下直接打开 <https://jiangshi-73.github.io/>：
+
+| 文件 | 用途 |
+| --- | --- |
+| `public/qr.svg` | 矢量版，线上地址 `/qr.svg`，任意缩放不糊 |
+| `public/qr.png` | 1024px PNG，线上地址 `/qr.png`，适合直接发给人 |
+| `docs/qr-poster.png` | 带站名和网址的海报版，适合打印或贴出来 |
+
+换域名后要重新生成：把网址换掉，用 `qrcode` 重新导出即可（错误纠正等级 H，留 2 个模块的静区）。
+
 ## 设计说明
 
 - **视觉语言**：近黑底 + 骨白字 + 唯一信号黄（`--signal`），所有分隔用 1px 细线，卡片/按钮全部直角
