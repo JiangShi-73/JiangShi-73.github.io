@@ -156,8 +156,51 @@ code, kbd { font-family: var(--mono); font-size: 0.86em; }
   position: relative;
 }
 
-.section { padding-block: clamp(64px, 9vw, 128px); position: relative; }
-.section--tight { padding-block: clamp(40px, 6vw, 76px); }
+.section { padding-block: clamp(56px, 7.5vw, 108px); position: relative; }
+.section--tight { padding-block: clamp(36px, 5vw, 68px); }
+
+/* 浅色面板：与深色区块交替，切出节奏 */
+.panel-paper {
+  background: #e7e5df;
+  color: #0a0b0c;
+  --paper: #0a0b0c;
+  --dim: #4f545c;
+  --faint: #7b808a;
+  --line: rgba(10, 11, 12, 0.2);
+  --line-soft: rgba(10, 11, 12, 0.1);
+  --line-strong: rgba(10, 11, 12, 0.42);
+  --signal: #a9761a;
+}
+
+.panel-paper::before,
+.panel-paper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(10, 11, 12, 0.2);
+}
+
+/* 顶部沿用首屏那条彩色光带 */
+.panel-paper::before {
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 96, 96, 0.55) 16%, rgba(242, 193, 78, 0.7) 40%, rgba(125, 226, 160, 0.55) 62%, rgba(126, 190, 255, 0.55) 82%, transparent);
+}
+.panel-paper::after { bottom: 0; }
+
+.panel-paper .btn--primary {
+  background: #0a0b0c;
+  border-color: #0a0b0c;
+  color: #e7e5df;
+}
+.panel-paper .btn--primary:hover { background: var(--signal); border-color: var(--signal); }
+
+.panel-paper .section-head__link:hover { color: #0a0b0c; border-color: #0a0b0c; }
+.panel-paper .post-row:hover { background: rgba(10, 11, 12, 0.045); }
+.panel-paper .post-row::before { background: #0a0b0c; }
+.panel-paper .tag { border-color: rgba(10, 11, 12, 0.22); color: #4f545c; }
 
 /* ---------- 5. 氛围层 ---------- */
 .ambient {
@@ -810,7 +853,7 @@ main { counter-reset: sec; }
   grid-template-columns: 104px minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(1rem, 3vw, 2.4rem);
-  padding: clamp(1.1rem, 2vw, 1.5rem) 0;
+  padding: clamp(0.95rem, 1.6vw, 1.25rem) 0;
   border-bottom: 1px solid var(--line-soft);
   position: relative;
   transition: background-color 0.4s var(--ease), padding-inline 0.5s var(--ease);
