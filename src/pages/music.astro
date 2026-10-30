@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TrackRow from '../components/TrackRow.astro';
+import { tracks } from '../data/music';
+---
+
+<BaseLayout title="音乐" description="一直在听的歌：氛围、钢琴、和一些老歌。">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Music / {String(tracks.length).padStart(2, '0')}</p>
+      <h1 class="reveal" style="--d: 60ms">一直在听的。</h1>
+      <p class="reveal" style="--d: 120ms">
+        没有歌单逻辑，就是循环到现在的那些。点开能听到，或者在播放器里搜歌名。
+      </p>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="tracks">
+        {tracks.map((track, index) => <TrackRow track={track} index={index} delay={index * 40} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

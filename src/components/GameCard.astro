@@ -1,0 +1,26 @@
+---
+import type { Game } from '../data/games';
+
+interface Props {
+  game: Game;
+  delay?: number;
+}
+
+const { game, delay = 0 } = Astro.props;
+---
+
+<article class="game-card reveal" style={`--d: ${delay}ms`}>
+  <div class="game-card__media">
+    <img src={game.cover} alt={`${game.title} 封面`} width="1200" height="1500" loading="lazy" decoding="async" />
+  </div>
+  <div class="game-card__body">
+    <span class="game-card__sub">{game.subtitle}</span>
+    <h3>{game.title}</h3>
+    <div class="game-card__meta">
+      <span>{game.year}</span>
+      <i style="width:3px;height:3px;background:currentColor" aria-hidden="true"></i>
+      <span>{game.platform}</span>
+    </div>
+    <p>{game.note}</p>
+  </div>
+</article>

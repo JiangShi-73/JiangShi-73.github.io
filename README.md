@@ -1,11 +1,11 @@
-# jiangshi — 个人博客 / 作品集
+# jiangshi — 收东西的个人站
 
-一个用 [Astro](https://astro.build) 搭的静态个人站：作品集 + 博客。
+一个用 [Astro](https://astro.build) 搭的静态个人站：**照片、音乐、游戏**，外加一点文章。项目区先空着，留给以后。
 视觉走「工业科幻 HUD」路线——细线网格、瞄准环、等宽标注、单一信号黄；构建产物是纯静态 HTML，可以扔到任何静态托管上。
 
 ![首页](docs/preview-home.jpg)
 
-> `docs/` 里是首页、项目页、文章列表的截图，只是预览用，可以随时删。
+> `docs/` 里是首页、照片、文章、关于的截图，只是预览用，可以随时删。
 
 ## 快速开始
 
@@ -27,17 +27,25 @@ npm run dev     # 本地开发：http://localhost:4321
 ```
 public/
   favicon.svg
-  images/            # 封面、头像等静态图（SVG，可换成 png/jpg）
+  images/            # 头像、瞄准环等静态图
+  photos/            # ★ 照片（现在是抽象的 SVG 占位图，换成自己的 jpg/png 就行）
+  games/             # ★ 游戏封面
 src/
   config.ts          # ★ 站点信息：名字、简介、邮箱、导航、社交链接
-  data/projects.ts   # ★ 项目数据（卡片 + 详情页内容）
+  data/photos.ts     # ★ 照片清单：一张一条
+  data/music.ts      # ★ 歌单：一首一条
+  data/games.ts      # ★ 游戏清单：一个一条
+  data/projects.ts   # ★ 项目（现在是空的，文件里有模板注释）
   content.config.ts  # 文章集合的 schema
   content/blog/      # ★ 文章：一篇一个 .md
   layouts/BaseLayout.astro
-  components/        # Nav / Footer / ProjectCard
+  components/        # Nav / Footer / PhotoTile / TrackRow / GameCard / ProjectCard
   pages/
-    index.astro      # 首页
-    projects/        # 项目列表 + 详情
+    index.astro      # 首页：照片 + 音乐 + 游戏 + 预留 + 文章
+    photos.astro     # 照片墙
+    music.astro      # 歌单
+    games.astro      # 游戏
+    projects/        # 项目（预留页）+ 详情
     blog/            # 文章列表 + 详情
     about.astro      # 关于
     404.astro
@@ -50,9 +58,26 @@ src/
 
 编辑 `src/config.ts`：站点名、一句话简介、邮箱、位置、社交链接、导航项、跑马灯文字。
 
-### 2. 项目
+### 2. 照片 / 音乐 / 游戏
 
-编辑 `src/data/projects.ts`，一个项目一个对象：
+三个数据文件，都是一条一个对象：
+
+```ts
+// src/data/photos.ts —— 图放进 public/photos/，src 写路径
+{ src: '/photos/dusk.svg', title: '傍晚六点的天', place: '杭州 · 西湖边', date: '2026.09' }
+
+// src/data/music.ts
+{ title: 'Sunset Lover', artist: 'Petit Biscuit', note: '单曲循环最多的一首', link: 'https://music.163.com/' }
+
+// src/data/games.ts —— 封面放 public/games/
+{ title: '死亡搁浅', subtitle: 'DEATH STRANDING', year: '2019', platform: 'PS5 / PC', note: '一句话感受', cover: '/games/g-stranding.svg' }
+```
+
+换图片：把 `public/photos/` 和 `public/games/` 里的 SVG 换成自己的 jpg/png，再把对应 `src`/`cover` 改掉即可。
+
+### 3. 项目（预留）
+
+`src/data/projects.ts` 现在是空数组，填一条就自动出现在 `/projects` 和详情页（文件里有模板注释）：
 
 ```ts
 {
@@ -71,7 +96,7 @@ src/
 }
 ```
 
-### 3. 写一篇新文章
+### 4. 写一篇新文章
 
 在 `src/content/blog/` 下新建 `my-post.md`，文件名就是网址（`/blog/my-post`）：
 
@@ -88,11 +113,6 @@ draft: false
 ```
 
 字段由 `src/content.config.ts` 校验：漏写 `title`/`description`/`date` 会在构建时报错，不会静默出错。
-
-### 4. 换图
-
-把图片放进 `public/images/`，然后把 `cover` 路径改成新文件名即可（png/jpg 都行）。
-现有几张封面是手写的 SVG，可以直接打开改颜色和构图。
 
 ### 5. 换配色 / 字体
 

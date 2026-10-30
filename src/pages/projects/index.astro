@@ -4,26 +4,44 @@ import ProjectCard from '../../components/ProjectCard.astro';
 import { projects } from '../../data/projects';
 ---
 
-<BaseLayout title="项目" description="做过的项目：产品、设计系统、数据可视化与独立开发。">
+<BaseLayout title="项目" description="项目区先空着，等以后再放。">
   <header class="page-head">
     <div class="wrap">
-      <p class="eyebrow reveal">Projects</p>
-      <h1 class="reveal" style="--d: 60ms">做过的，<span class="grad">和做着的</span>。</h1>
+      <p class="eyebrow reveal">Projects / {String(projects.length).padStart(2, '0')}</p>
+      <h1 class="reveal" style="--d: 60ms">这里先<span class="grad">空着</span>。</h1>
       <p class="reveal" style="--d: 120ms">
-        从独立小工具到团队级设计系统。每个项目都尽量写清楚：为什么做、怎么做的、最后怎么样。
+        项目区留着，等有想放的东西再填。现在想看的，是照片、音乐和游戏。
       </p>
     </div>
   </header>
 
   <section class="section--tight">
     <div class="wrap">
-      <div class="projects-grid projects-grid--two">
-        {
-          projects.map((project, index) => (
-            <ProjectCard project={project} wide={index === 0} delay={index * 70} index={index} />
-          ))
-        }
-      </div>
+      {
+        projects.length > 0 ? (
+          <div class="projects-grid projects-grid--two">
+            {projects.map((project, index) => (
+              <ProjectCard project={project} wide={index === 0} delay={index * 70} index={index} />
+            ))}
+          </div>
+        ) : (
+          <div class="reserve reveal">
+            <div>
+              <h3>预留区</h3>
+              <p>
+                这块地方是给以后留的。想放东西的时候，在 <code>src/data/projects.ts</code>
+                里加一条（文件里有模板），卡片和详情页会自动生成，不用改别的文件。
+              </p>
+            </div>
+            <a class="btn btn--ghost" href="/">
+              先去逛逛
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h13M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        )
+      }
     </div>
   </section>
 </BaseLayout>

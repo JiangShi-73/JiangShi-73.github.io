@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoTile from '../components/PhotoTile.astro';
+import { photos } from '../data/photos';
+---
+
+<BaseLayout title="照片" description="拍到的一些东西：天空、海、雨后的山。">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Photos / {String(photos.length).padStart(2, '0')}</p>
+      <h1 class="reveal" style="--d: 60ms">拍到的<span class="grad">一些</span>。</h1>
+      <p class="reveal" style="--d: 120ms">
+        不追求好看，只是当时想按一下快门。大部分是路上、窗边、或者抬头看见的东西。
+      </p>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="gallery">
+        {photos.map((photo, index) => <PhotoTile photo={photo} delay={index * 50} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

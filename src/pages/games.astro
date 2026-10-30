@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GameCard from '../components/GameCard.astro';
+import { games } from '../data/games';
+---
+
+<BaseLayout title="游戏" description="玩进去过的游戏：死亡搁浅、空洞骑士、星际拓荒。">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Games / {String(games.length).padStart(2, '0')}</p>
+      <h1 class="reveal" style="--d: 60ms">玩进去过的。</h1>
+      <p class="reveal" style="--d: 120ms">
+        不是推荐榜，是"玩完之后还会想起来"的那种。每张下面写了一句当时的感觉。
+      </p>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="games-grid">
+        {games.map((game, index) => <GameCard game={game} delay={index * 60} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

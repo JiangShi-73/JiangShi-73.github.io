@@ -1,0 +1,20 @@
+---
+import type { Photo } from '../data/photos';
+
+interface Props {
+  photo: Photo;
+  delay?: number;
+}
+
+const { photo, delay = 0 } = Astro.props;
+---
+
+<figure class="photo reveal" style={`--d: ${delay}ms`}>
+  <div class="photo__media">
+    <img src={photo.src} alt={photo.title} width="1200" height="1500" loading="lazy" decoding="async" />
+  </div>
+  <figcaption>
+    <span class="photo__title">{photo.title}</span>
+    <span class="photo__meta">{photo.place} · {photo.date}</span>
+  </figcaption>
+</figure>

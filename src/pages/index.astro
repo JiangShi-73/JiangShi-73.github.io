@@ -1,17 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import PhotoTile from '../components/PhotoTile.astro';
+import TrackRow from '../components/TrackRow.astro';
+import GameCard from '../components/GameCard.astro';
 import { getCollection } from 'astro:content';
 import { site } from '../config';
-import { projects } from '../data/projects';
-
-const featured = projects.filter((project) => project.featured).slice(0, 3);
+import { photos } from '../data/photos';
+import { tracks } from '../data/music';
+import { games } from '../data/games';
 
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
-const posts = allPosts.slice(0, 4);
+const posts = allPosts.slice(0, 3);
 
 const formatDate = (date: Date) =>
   date
@@ -30,7 +32,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
     <div class="wrap hero__inner">
       <div class="hero__top">
-        <span>SITE 001 / PORTFOLIO — 2026</span>
+        <span>SITE 001 / COLLECTION — 2026</span>
         <span class="hero__coords">30.2741° N / 120.1551° E · HANGZHOU</span>
       </div>
 
@@ -38,39 +40,39 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <p class="eyebrow reveal">{site.eyebrow}</p>
 
         <h1 class="hero__title reveal" style="--d: 80ms">
-          <span>把想法，</span>
-          <span>做成<span class="grad">看得见</span></span>
-          <span>的东西。</span>
+          <span>喜欢的</span>
+          <span>照片、<span class="grad">音乐</span></span>
+          <span>和游戏。</span>
         </h1>
 
         <p class="hero__lede reveal" style="--d: 160ms">
-          我是 {site.author}，做界面、写代码，也记录一些关于设计与工程的思考。
-          这里放着做过的项目，和一些正在想的事。
+          我是 {site.author}。这里不放作品集，只收我喜欢的——
+          路上拍到的、单曲循环的、玩完之后还会想起的。看到什么就放什么。
         </p>
 
         <div class="hero__actions reveal" style="--d: 240ms">
-          <a class="btn btn--primary" href="/projects">
-            看看项目
+          <a class="btn btn--primary" href="/photos">
+            看看照片
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M5 12h13M13 6l6 6-6 6" />
             </svg>
           </a>
-          <a class="btn btn--ghost" href="/blog">读读文章</a>
+          <a class="btn btn--ghost" href="/music">听听歌</a>
         </div>
       </div>
 
       <div class="hero__stats reveal" style="--d: 320ms">
         <div class="stat">
-          <div class="stat__num">{pad(projects.length)}</div>
-          <div class="stat__label">Projects</div>
+          <div class="stat__num">{pad(photos.length)}</div>
+          <div class="stat__label">Photos</div>
         </div>
         <div class="stat">
-          <div class="stat__num">{pad(allPosts.length)}</div>
-          <div class="stat__label">Writing</div>
+          <div class="stat__num">{pad(tracks.length)}</div>
+          <div class="stat__label">Tracks</div>
         </div>
         <div class="stat">
-          <div class="stat__num">{pad(6)}</div>
-          <div class="stat__label">Years</div>
+          <div class="stat__num">{pad(games.length)}</div>
+          <div class="stat__label">Games</div>
         </div>
         <div class="scroll-hint" style="margin-left: auto">
           <span></span>
@@ -87,46 +89,106 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </div>
 
-  <!-- 一句话 -->
-  <section class="section--tight">
-    <div class="wrap">
-      <p class="mono reveal" style="margin-bottom: 1rem">// STATEMENT</p>
-      <blockquote class="statement reveal" style="margin-left: 0; margin-right: 0">
-        好的界面不解释自己，它只是刚好
-        <span>顺手</span>。
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- 精选项目 -->
-  <section class="section" id="work">
+  <!-- 照片 -->
+  <section class="section" id="photos">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
-          <p class="eyebrow">Selected Work</p>
-          <h2>最近做的一些事</h2>
+          <p class="eyebrow">Photos</p>
+          <h2>拍到的一些</h2>
         </div>
-        <a class="section-head__link" href="/projects">
-          全部项目
+        <a class="section-head__link" href="/photos">
+          全部 {pad(photos.length)} 张
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M7 17L17 7M9 7h8v8" />
           </svg>
         </a>
       </div>
 
-      <div class="projects-grid">
-        {featured.map((project, index) => <ProjectCard project={project} index={index} delay={index * 90} />)}
+      <div class="gallery">
+        {photos.slice(0, 4).map((photo, index) => <PhotoTile photo={photo} delay={index * 60} />)}
       </div>
     </div>
   </section>
 
-  <!-- 最新文章 -->
+  <!-- 音乐 -->
+  <section class="section section--tight" id="music">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Music</p>
+          <h2>一直在听的</h2>
+        </div>
+        <a class="section-head__link" href="/music">
+          全部 {pad(tracks.length)} 首
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h13M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="tracks">
+        {tracks.slice(0, 5).map((track, index) => <TrackRow track={track} index={index} delay={index * 50} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 游戏 -->
+  <section class="section section--tight" id="games">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Games</p>
+          <h2>玩进去过的</h2>
+        </div>
+        <a class="section-head__link" href="/games">
+          全部 {pad(games.length)} 个
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17L17 7M9 7h8v8" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="games-grid">
+        {games.slice(0, 3).map((game, index) => <GameCard game={game} delay={index * 70} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目（预留） -->
+  <section class="section section--tight" id="projects">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Projects</p>
+          <h2>留个位置</h2>
+        </div>
+        <a class="section-head__link" href="/projects">
+          去看看
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h13M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="reserve reveal">
+        <div>
+          <h3>项目区先空着</h3>
+          <p>
+            以后有想放的再填。文件在 <code>src/data/projects.ts</code>，加一条就会自动生成卡片和详情页。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 文章 -->
   <section class="section section--tight panel-paper">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
           <p class="eyebrow">Writing</p>
-          <h2>最近写下的</h2>
+          <h2>写下来的</h2>
         </div>
         <a class="section-head__link" href="/blog">
           全部文章

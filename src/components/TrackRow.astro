@@ -1,0 +1,33 @@
+---
+import type { Track } from '../data/music';
+
+interface Props {
+  track: Track;
+  index: number;
+  delay?: number;
+}
+
+const { track, index, delay = 0 } = Astro.props;
+---
+
+<div class="track reveal" style={`--d: ${delay}ms`}>
+  <span class="track__idx">{String(index + 1).padStart(2, '0')}</span>
+  <div>
+    <div class="track__title">{track.title}</div>
+    <div class="track__artist">{track.artist}</div>
+  </div>
+  <div style="display:flex; align-items:center; gap:1.2rem">
+    {track.note && <span class="track__note">{track.note}</span>}
+    {
+      track.link ? (
+        <a class="track__play" href={track.link} target="_blank" rel="noreferrer noopener" aria-label={`打开 ${track.title}`}>
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z" /></svg>
+        </a>
+      ) : (
+        <span class="track__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M8 5l11 7-11 7z" /></svg>
+        </span>
+      )
+    }
+  </div>
+</div>
