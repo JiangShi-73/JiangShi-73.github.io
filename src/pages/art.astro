@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArtTile from '../components/ArtTile.astro';
+import { artworks } from '../data/art';
+---
+
+<BaseLayout title="画" description="留给画的一面墙：插画、画作，或者自己画的。" theme="dark">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Art / {String(artworks.length).padStart(2, '0')}</p>
+      <h1 class="reveal" style="--d: 60ms">喜欢的<span class="grad">画</span>。</h1>
+      <p class="reveal" style="--d: 120ms">
+        插画、画作，或者自己画的。先留着一面墙，等想挂的再慢慢挂上来。
+      </p>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      {
+        artworks.length > 0 ? (
+          <div class="gallery">
+            {artworks.map((piece, index) => <ArtTile piece={piece} index={index} delay={index * 50} />)}
+          </div>
+        ) : (
+          <div class="reserve reveal">
+            <div>
+              <h3>预留区</h3>
+              <p>这块地方留给画。等想挂的整理好，再慢慢挂上来。</p>
+            </div>
+            <a class="btn btn--ghost" href="/">
+              先去逛逛
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h13M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

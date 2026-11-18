@@ -10,11 +10,11 @@ interface Props {
   title?: string;
   description?: string;
   noFooterCta?: boolean;
-  /** 'paper' 让整页底色变成米白（关于页用） */
-  theme?: 'dark' | 'paper';
+  /** 'dark' 是档案舱（学业与开发）的深色主题，其余页面默认米白 */
+  theme?: 'paper' | 'dark';
 }
 
-const { title, description = site.description, noFooterCta = false, theme = 'dark' } = Astro.props;
+const { title, description = site.description, noFooterCta = false, theme = 'paper' } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} · ${site.eyebrow}`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com');
 ---
@@ -27,8 +27,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
-    <meta name="theme-color" content="#ece7dc" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content={theme === 'dark' ? '#0c1016' : '#ece7dc'} />
+    <meta name="color-scheme" content={theme === 'dark' ? 'dark' : 'light'} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
@@ -55,6 +55,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com
       <slot />
     </main>
     <Footer noCta={noFooterCta} />
+    <div class="scan" aria-hidden="true"></div>
     <div class="grain" aria-hidden="true"></div>
 
     <script>
@@ -104,6 +105,46 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com
           reveals.forEach((el) => io.observe(el));
         }
       }
+
+      // 歌单行内播放：展开网易云外链播放器，同一时间只保留一个
+      const closeDecks = () => {
+        document.querySelectorAll<HTMLElement>('.deck').forEach((deck) => {
+          deck.hidden = true;
+          const frame = deck.querySelector('.deck__frame');
+          if (frame) frame.innerHTML = '';
+        });
+        document.querySelectorAll<HTMLButtonElement>('.track__play.is-on').forEach((btn) => {
+          btn.classList.remove('is-on');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      };
+
+      document.addEventListener('click', (event) => {
+        const target = event.target as Element;
+        if (target.closest('.deck__close')) {
+          closeDecks();
+          return;
+        }
+        const btn = target.closest<HTMLButtonElement>('.track__play[data-id]');
+        if (!btn) return;
+        const deck = btn.closest('.track-unit')?.querySelector<HTMLElement>('.deck');
+        if (!deck) return;
+        const wasOpen = !deck.hidden;
+        closeDecks();
+        if (wasOpen) return;
+        deck.hidden = false;
+        btn.classList.add('is-on');
+        btn.setAttribute('aria-expanded', 'true');
+        const frame = deck.querySelector('.deck__frame');
+        if (frame) {
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://music.163.com/outchain/player?type=2&id=${btn.dataset.id}&auto=1&height=66`;
+          iframe.height = '66';
+          iframe.title = btn.getAttribute('aria-label') ?? '播放器';
+          iframe.setAttribute('allow', 'autoplay; encrypted-media');
+          frame.appendChild(iframe);
+        }
+      });
     </script>
   </body>
 </html>

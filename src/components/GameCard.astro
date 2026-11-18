@@ -3,15 +3,17 @@ import type { Game } from '../data/games';
 
 interface Props {
   game: Game;
+  index?: number;
   delay?: number;
 }
 
-const { game, delay = 0 } = Astro.props;
+const { game, index, delay = 0 } = Astro.props;
 ---
 
 <article class="game-card reveal" style={`--d: ${delay}ms`}>
   <div class="game-card__media">
-    <img src={game.cover} alt={`${game.title} 封面`} width="1200" height="1500" loading="lazy" decoding="async" />
+    {index !== undefined && <span class="game-card__no" aria-hidden="true">NO. {String(index + 1).padStart(2, '0')}</span>}
+    <img src={game.cover} alt={`${game.title} 封面`} loading="lazy" decoding="async" />
   </div>
   <div class="game-card__body">
     <span class="game-card__sub">{game.subtitle}</span>

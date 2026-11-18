@@ -1,0 +1,28 @@
+---
+import type { Film } from '../data/films';
+
+interface Props {
+  film: Film;
+  index?: number;
+  delay?: number;
+}
+
+const { film, index, delay = 0 } = Astro.props;
+---
+
+<article class={`film-card film-card--${film.kind === '电影' ? 'film' : film.kind === '剧集' ? 'series' : 'anime'} reveal`} style={`--d: ${delay}ms`}>
+  <div class="film-card__top">
+    <span class="film-card__kind">{film.kind}</span>
+    <span class="film-card__year">{film.year}</span>
+  </div>
+  <div class="film-card__poster">
+    <img src={film.cover} alt={`${film.title} 海报`} loading="lazy" decoding="async" />
+  </div>
+  <div class="film-card__body">
+    {index !== undefined && <span class="film-card__idx" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>}
+    <h3>{film.title}</h3>
+    <span class="film-card__original">{film.original}</span>
+    {film.note && <p>{film.note}</p>}
+  </div>
+  <div class="film-card__band" aria-hidden="true"></div>
+</article>

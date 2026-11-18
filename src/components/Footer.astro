@@ -29,6 +29,15 @@ const year = new Date().getFullYear();
       )
     }
 
+    <div class="footer__word" aria-hidden="true">{site.name}</div>
+
+    <div class="footer__doc" aria-hidden="true">
+      <span class="footer__barcode"></span>
+      <span>DOC NO. JS-2026-001</span>
+      <span>REV A / {site.location}</span>
+      <span class="footer__swatches"><i></i><i></i><i></i></span>
+    </div>
+
     <div class="footer__bottom">
       <p>© {year} {site.name} — 用 Astro 构建</p>
       <div class="footer__socials">

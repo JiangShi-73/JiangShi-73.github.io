@@ -10,7 +10,7 @@ const isActive = (href: string) => (href === '/' ? current === '/' : current.sta
     <a class="brand" href="/" aria-label={`${site.name} 首页`}>
       <span class="brand__mark" aria-hidden="true"></span>
       <span class="brand__name">{site.name}</span>
-      <span class="brand__sub" aria-hidden="true">/ portfolio</span>
+      <span class="brand__sub" aria-hidden="true">/ collection</span>
     </a>
 
     <nav class="nav__links" aria-label="主导航">
@@ -36,13 +36,13 @@ const isActive = (href: string) => (href === '/' ? current === '/' : current.sta
       {
         site.nav.map((item, i) => (
           <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-            <span class="mono">0{i + 1}</span>
+            <span class="mono">{String(i + 1).padStart(2, '0')}</span>
             {item.label}
           </a>
         ))
       }
       <a href={`mailto:${site.email}`}>
-        <span class="mono">05</span>
+        <span class="mono">{String(site.nav.length + 1).padStart(2, '0')}</span>
         联系
       </a>
     </nav>

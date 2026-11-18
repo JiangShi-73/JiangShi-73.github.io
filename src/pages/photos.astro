@@ -18,7 +18,7 @@ import { photos } from '../data/photos';
   <section class="section--tight">
     <div class="wrap">
       <div class="gallery">
-        {photos.map((photo, index) => <PhotoTile photo={photo} delay={index * 50} />)}
+        {photos.map((photo, index) => <PhotoTile photo={photo} index={index} delay={index * 50} />)}
       </div>
     </div>
   </section>

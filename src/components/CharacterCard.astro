@@ -1,0 +1,27 @@
+---
+import type { Character } from '../data/characters';
+
+interface Props {
+  character: Character;
+  index?: number;
+  delay?: number;
+}
+
+const { character, index, delay = 0 } = Astro.props;
+---
+
+<article class="film-card film-card--char reveal" style={`--d: ${delay}ms`}>
+  <div class="film-card__top">
+    <span class="film-card__kind">{character.source}</span>
+  </div>
+  <div class="film-card__poster">
+    <img src={character.image} alt={`${character.name} 立绘`} loading="lazy" decoding="async" />
+  </div>
+  <div class="film-card__body">
+    {index !== undefined && <span class="film-card__idx" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>}
+    <h3>{character.name}</h3>
+    {character.original && <span class="film-card__original">{character.original}</span>}
+    {character.note && <p>{character.note}</p>}
+  </div>
+  <div class="film-card__band" aria-hidden="true"></div>
+</article>

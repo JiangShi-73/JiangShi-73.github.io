@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { studies, works } from '../data/work';
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<BaseLayout title="学业与开发" description="档案舱：在学的东西，和做出来的东西。" theme="dark" noFooterCta>
+  <header class="work-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Archive / Section B</p>
+      <h1 class="reveal" style="--d: 60ms">学业与<span class="grad">开发</span>。</h1>
+      <p class="work-head__lede reveal" style="--d: 120ms">
+        收藏箱放喜欢的东西，这一舱放做出来的东西。
+      </p>
+      <div class="readout reveal" style="--d: 180ms" aria-hidden="true">
+        <span>DOC / JS-2026-002</span>
+        <span>REV A</span>
+        <span>STATUS / 持续更新</span>
+        <span class="readout__spacer"></span>
+        <span>LIGHTS / OFF</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Study</p>
+          <h2>在学的</h2>
+        </div>
+        <span class="section-head__link">{pad(studies.length)} 条</span>
+      </div>
+
+      <div class="log">
+        {
+          studies.map((item, index) => (
+            <div class="log__item reveal" style={`--d: ${index * 60}ms`}>
+              <span class="log__period">{item.period}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Builds</p>
+          <h2>做出来的</h2>
+        </div>
+        <span class="section-head__link">{pad(works.length)} 件</span>
+      </div>
+
+      <div class="dossier-grid">
+        {
+          works.map((item, index) => (
+            <article class="dossier reveal" style={`--d: ${index * 70}ms`}>
+              <span class="dossier__no" aria-hidden="true">B-{pad(index + 1)}</span>
+              <h3>{item.name}</h3>
+              <span class="dossier__stack">{item.stack}</span>
+              <p>{item.desc}</p>
+              {item.link && (
+                <a class="dossier__link" href={item.link} target="_blank" rel="noreferrer noopener">
+                  查看仓库
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M7 17L17 7M9 7h8v8" />
+                  </svg>
+                </a>
+              )}
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="work-back reveal">
+        <a class="btn btn--ghost" href="/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H6M11 6l-6 6 6 6" />
+          </svg>
+          回到收藏箱
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

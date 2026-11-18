@@ -1,0 +1,22 @@
+---
+import type { ArtPiece } from '../data/art';
+
+interface Props {
+  piece: ArtPiece;
+  index?: number;
+  delay?: number;
+}
+
+const { piece, index, delay = 0 } = Astro.props;
+---
+
+<figure class="photo reveal" style={`--d: ${delay}ms`}>
+  <div class="photo__media">
+    {index !== undefined && <span class="photo__idx" aria-hidden="true">FIG. {String(index + 1).padStart(2, '0')}</span>}
+    <img src={piece.src} alt={piece.title} loading="lazy" decoding="async" />
+  </div>
+  <figcaption>
+    <span class="photo__title">{piece.title}</span>
+    <span class="photo__meta">{piece.meta} · {piece.year}</span>
+  </figcaption>
+</figure>

@@ -10,24 +10,28 @@ interface Props {
 const { track, index, delay = 0 } = Astro.props;
 ---
 
-<div class="track reveal" style={`--d: ${delay}ms`}>
-  <span class="track__idx">{String(index + 1).padStart(2, '0')}</span>
-  <div>
-    <div class="track__title">{track.title}</div>
-    <div class="track__artist">{track.artist}</div>
+<div class="track-unit">
+  <div class="track reveal" style={`--d: ${delay}ms`}>
+    <span class="track__idx">{String(index + 1).padStart(2, '0')}</span>
+    <img class="track__cover" src={track.cover} alt={`${track.title} 封面`} width="600" height="600" loading="lazy" decoding="async" />
+    <div>
+      <div class="track__title">{track.title}</div>
+      <div class="track__artist">{track.artist}</div>
+    </div>
+    <span class="track__leader" aria-hidden="true"></span>
+    <div style="display:flex; align-items:center; gap:1.2rem">
+      {track.note && <span class="track__note">{track.note}</span>}
+      <button class="track__play" type="button" data-id={track.neteaseId} aria-expanded="false" aria-label={`播放 ${track.title}`}>
+        <svg class="i-play" viewBox="0 0 24 24" width="11" height="11" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z" /></svg>
+        <svg class="i-stop" viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" /></svg>
+      </button>
+    </div>
   </div>
-  <div style="display:flex; align-items:center; gap:1.2rem">
-    {track.note && <span class="track__note">{track.note}</span>}
-    {
-      track.link ? (
-        <a class="track__play" href={track.link} target="_blank" rel="noreferrer noopener" aria-label={`打开 ${track.title}`}>
-          <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z" /></svg>
-        </a>
-      ) : (
-        <span class="track__play" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M8 5l11 7-11 7z" /></svg>
-        </span>
-      )
-    }
+  <div class="deck" hidden>
+    <div class="deck__head">
+      <span>PLAYBACK / 网易云 · ID {track.neteaseId}</span>
+      <button class="deck__close" type="button">收起</button>
+    </div>
+    <div class="deck__frame"></div>
   </div>
 </div>

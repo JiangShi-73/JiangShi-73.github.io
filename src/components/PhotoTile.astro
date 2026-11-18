@@ -3,14 +3,16 @@ import type { Photo } from '../data/photos';
 
 interface Props {
   photo: Photo;
+  index?: number;
   delay?: number;
 }
 
-const { photo, delay = 0 } = Astro.props;
+const { photo, index, delay = 0 } = Astro.props;
 ---
 
 <figure class="photo reveal" style={`--d: ${delay}ms`}>
   <div class="photo__media">
+    {index !== undefined && <span class="photo__idx" aria-hidden="true">FIG. {String(index + 1).padStart(2, '0')}</span>}
     <img src={photo.src} alt={photo.title} width="1200" height="1500" loading="lazy" decoding="async" />
   </div>
   <figcaption>

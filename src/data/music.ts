@@ -2,17 +2,19 @@ export interface Track {
   title: string;
   artist: string;
   note?: string;
-  link?: string;
+  cover: string;
+  /** 网易云歌曲 ID，用于行内播放器 */
+  neteaseId: number;
 }
 
-/** 喜欢的歌。link 可以是网易云 / Spotify / YouTube 的地址 */
+/** 喜欢的歌。cover 放在 public/covers/ 下 */
 export const tracks: Track[] = [
-  { title: 'Sunset Lover', artist: 'Petit Biscuit', note: '单曲循环最多的一首', link: 'https://music.163.com/' },
-  { title: 'Divenire', artist: 'Ludovico Einaudi', note: '写东西的时候放' },
-  { title: 'Weightless', artist: 'Marconi Union', note: '睡不着会听' },
-  { title: '夜空中最亮的星', artist: '逃跑计划' },
-  { title: 'Intro', artist: 'The xx', note: '前奏比歌更出名' },
-  { title: '海上钢琴师 · Playing Love', artist: 'Ennio Morricone' },
-  { title: 'Bloom', artist: 'The Paper Kites' },
-  { title: 'Merry Christmas Mr. Lawrence', artist: '坂本龍一', note: '每年冬天都会回来听' },
+  { title: '血液型', artist: 'Кино', note: 'Группа крови，1988', cover: '/covers/kino-blood.jpg', neteaseId: 26668133 },
+  { title: '夜如此寂静', artist: 'Кино', note: 'Спокойная ночь，1989', cover: '/covers/kino-night.jpg', neteaseId: 26710593 },
+  { title: '沧海一粟', artist: '刘森', cover: '/covers/liusen-emei.jpg', neteaseId: 3437177548 },
+  { title: '深海', artist: '刘森', cover: '/covers/liusen-shenhai.jpg', neteaseId: 1860234945 },
+  { title: '峨眉', artist: '刘森', cover: '/covers/liusen-emei.jpg', neteaseId: 3353911366 },
+  { title: 'Promise', artist: '山冈晃', note: '寂静岭 2 OST', cover: '/covers/yamaoka-promise.jpg', neteaseId: 18861490 },
+  { title: '微茫', artist: '塞壬唱片-Monster Siren', note: '去咧嘴谷 OST', cover: '/covers/siren-weimang.jpg', neteaseId: 2115755857 },
+  { title: '赴大荒', artist: '塞壬唱片-Monster Siren', note: '怀黍离 OST', cover: '/covers/siren-fudahuang.jpg', neteaseId: 2124415181 },
 ];

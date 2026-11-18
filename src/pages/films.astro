@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilmCard from '../components/FilmCard.astro';
+import { films } from '../data/films';
+---
+
+<BaseLayout title="剧" description="看完还会想起的：星际穿越、流浪地球、潜伏、进击的巨人、命运石之门。">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Films / {String(films.length).padStart(2, '0')}</p>
+      <h1 class="reveal" style="--d: 60ms">看完还会<span class="grad">想起的</span>。</h1>
+      <p class="reveal" style="--d: 120ms">
+        电影、剧集、动画都算。不按类型排，按“过了很久还会想起哪一幕”排。
+      </p>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="films-grid">
+        {films.map((film, index) => <FilmCard film={film} index={index} delay={index * 60} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

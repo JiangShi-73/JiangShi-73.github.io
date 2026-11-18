@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CharacterCard from '../components/CharacterCard.astro';
+import { characters } from '../data/characters';
+
+const pad = (n: number) => String(n).padStart(2, '0');
+const reserveSlots = 2;
+---
+
+<BaseLayout title="角色" description="喜欢的角色：从游戏、剧、动画里留下来的那些。" theme="dark">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="eyebrow reveal">Characters / {pad(characters.length)}</p>
+      <h1 class="reveal" style="--d: 60ms">喜欢的<span class="grad">角色</span>。</h1>
+      <p class="reveal" style="--d: 120ms">
+        从游戏、剧、动画里留下来的那些。不按人气排，按“过了很久还会想起”排。
+      </p>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="films-grid">
+        {characters.map((character, index) => (
+          <CharacterCard character={character} index={index} delay={index * 60} />
+        ))}
+        {
+          Array.from({ length: reserveSlots }, (_, i) => (
+            <article class="film-card film-card--char film-card--reserve reveal" style={`--d: ${(characters.length + i) * 60}ms`} aria-hidden="true">
+              <div class="film-card__top">
+                <span class="film-card__kind">预留</span>
+              </div>
+              <div class="film-card__poster">
+                <span class="char-reserve__idx">{pad(characters.length + i + 1)}</span>
+              </div>
+              <div class="film-card__body">
+                <span class="film-card__original">Reserve</span>
+              </div>
+              <div class="film-card__band" aria-hidden="true"></div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
