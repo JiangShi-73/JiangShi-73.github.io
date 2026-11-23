@@ -26,7 +26,14 @@ npm run build   # 必须通过再交付
 | 文件 | 作用 |
 | --- | --- |
 | `src/config.ts` | 站点名、简介、邮箱、导航、跑马灯 |
-| `src/data/{photos,music,games,projects}.ts` | 四类内容的数据 |
+| `src/data/photos.ts` | 照片 |
+| `src/data/music.ts` | 音乐（含网易云 ID，行内播放） |
+| `src/data/games.ts` | 游戏 |
+| `src/data/films.ts` | 剧 / 电影 / 动画 |
+| `src/data/characters.ts` | 角色 |
+| `src/data/art.ts` | 画（当前为空） |
+| `src/data/work.ts` | 档案舱：学业 + 开发成果 |
+| `src/data/projects.ts` | 项目（当前为空，文件内有模板） |
 | `src/styles/global.css` | 全部样式 + 设计 token |
 | `src/layouts/BaseLayout.astro` | 字体、meta、脚本、导航页脚 |
 | `src/components/` | Nav / Footer / PhotoTile / TrackRow / GameCard / ProjectCard |
