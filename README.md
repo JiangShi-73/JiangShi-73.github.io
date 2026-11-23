@@ -4,7 +4,7 @@
 
 视觉走 NASA-punk「航天局印刷品」路线：米白纸面、墨黑粗规则线、赭红 / 藏青 / 芥末黄三块饱和色、编号与等宽标注；档案舱、角色、画三个页面用同一套版式的深色 token。构建产物是纯静态 HTML，零框架运行时。
 
-**线上地址：<https://weiyuan-qianfu.github.io/>**
+**线上地址：<https://jiangshi-73.github.io/>**
 
 > `docs/` 里的截图是旧版预览，仅作留档，可以随时删。
 
@@ -140,7 +140,7 @@ draft: false
 
 ## 发布
 
-仓库：[weiyuan-qianfu/weiyuan-qianfu.github.io](https://github.com/weiyuan-qianfu/weiyuan-qianfu.github.io)（GitHub 用户主页仓库，站点在根路径下，不需要 `base`）。
+仓库：[JiangShi-73/JiangShi-73.github.io](https://github.com/JiangShi-73/JiangShi-73.github.io)（GitHub 用户主页仓库，站点在根路径下，不需要 `base`）。
 
 改完内容推上去就自动发布：
 
@@ -158,7 +158,7 @@ GitHub Actions（[deploy.yml](.github/workflows/deploy.yml)）自动构建并发
 
 1. 在域名所在的阿里云账号里改解析：
    - `@`  A 记录 → `185.199.108.153` / `185.199.109.153` / `185.199.110.153` / `185.199.111.153`
-   - `www` CNAME → `weiyuan-qianfu.github.io`
+   - `www` CNAME → `jiangshi-73.github.io`
 2. 把 `astro.config.mjs` 的 `site` 改成 `'https://jiangshi.com'`
 3. 新建 `public/CNAME`，内容就一行：`jiangshi.com`
 4. 仓库 Settings → Pages → Custom domain 填 `jiangshi.com`，勾上 Enforce HTTPS
@@ -167,7 +167,7 @@ GitHub Actions（[deploy.yml](.github/workflows/deploy.yml)）自动构建并发
 
 ## 二维码
 
-指向站点首页的二维码，扫一下直接打开 <https://weiyuan-qianfu.github.io/>：
+指向站点首页的二维码，扫一下直接打开 <https://jiangshi-73.github.io/>：
 
 | 文件 | 用途 |
 | --- | --- |

@@ -15,8 +15,8 @@
 
 | | |
 | --- | --- |
-| 线上 | <https://weiyuan-qianfu.github.io/> |
-| 仓库 | <https://github.com/weiyuan-qianfu/weiyuan-qianfu.github.io>（分支 `main`） |
+| 线上 | <https://jiangshi-73.github.io/> |
+| 仓库 | <https://github.com/JiangShi-73/JiangShi-73.github.io>（分支 `main`） |
 | 部署 | GitHub Pages + GitHub Actions（push 即自动构建） |
 | 构建产物 | 纯静态 HTML，13 个页面，约 600KB |
 

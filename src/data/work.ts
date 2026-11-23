@@ -31,7 +31,7 @@ export const works: WorkItem[] = [
     name: '这个站本身',
     stack: 'Astro / TypeScript / CSS',
     desc: '零框架运行时的静态收藏箱：内容集合、双主题、自托管字体，push 即部署。',
-    link: 'https://github.com/weiyuan-qianfu/weiyuan-qianfu.github.io',
+    link: 'https://github.com/JiangShi-73/JiangShi-73.github.io',
   },
   {
     name: '其余项目',
